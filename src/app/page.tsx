@@ -16,35 +16,35 @@ const Home: React.FC = () => {
   const MachinesInfo = 'http://localhost:3000/src/app/pages/api/machines';
 
 // 404エラー出る
-  // useEffect(() => {
-  //   const fetchMachines = async () => {
-  //     try {
-  //       // 将来的にはバックエンド側から装置の情報をもらう。
-  //       const response = await axios.get(MachinesInfo);
-  //       setMachines(response.data);
-  //     } catch (error) {
-  //       if (axios.isAxiosError(error)) {
-  //         // Axiosエラーの場合の処理
-  //         setError(`データの取得中にエラーが発生しました: ${error.message}`);
-  //       } else {
-  //         // その他のエラーの場合の処理
-  //         setError('データの取得中に予期しないエラーが発生しました。');
-  //       }
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchMachines = async () => {
+      try {
+        // 将来的にはバックエンド側から装置の情報をもらう。
+        const response = await axios.get(MachinesInfo);
+        setMachines(response.data);
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          // Axiosエラーの場合の処理
+          setError(`データの取得中にエラーが発生しました: ${error.message}`);
+        } else {
+          // その他のエラーの場合の処理
+          setError('データの取得中に予期しないエラーが発生しました。');
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  //   fetchMachines();
-  // }, []);
+    fetchMachines();
+  }, []);
 
-  // if (loading) {
-  //   return <div>ロード中...</div>;
-  // }
+  if (loading) {
+    return <div>ロード中...</div>;
+  }
 
-  // if (error) {
-  //   return <div>{error}</div>;
-  // }
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <main>
