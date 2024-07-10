@@ -8,12 +8,26 @@ import { Machine } from '../Type'
 const Registered = () => {
 
     const [DetecctMessage, SetDetecctMessage] = useState<string | null>(null);
-    const MachineInfo : Machine;
+    const MachineInfo: Machine = {
+        ipAdr: '192.168.0.100',
+        speed: '15000',
+        goodNum: '10000000',
+        NgNum: '1500'
+    };
 
     const handleClick = () => {
         SetDetecctMessage('検出完了');
-       
-      };
+    };
+
+    const RegisteredClick = () => {
+        SetDetecctMessage(null);
+        // 装置情報 useStaeに追加
+        //......
+    };
+
+    const deleteClick =() => {
+
+    };
 
     return (
         <div>
@@ -32,7 +46,9 @@ const Registered = () => {
             </div>
 
             {DetecctMessage && <p>{DetecctMessage}</p>}
-            {DetecctMessage && <Card />}
+            {DetecctMessage && <Card machineInfo={MachineInfo} isEnableDeleteButton={false} isEnableDetailButton={false} deleteClick={() => {}} />}
+
+            {DetecctMessage && <button type="button" className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" onClick={RegisteredClick}>登録</button>}
 
         </div>
     );

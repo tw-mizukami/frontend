@@ -15,36 +15,39 @@ const Home: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const MachinesInfo = 'http://localhost:3000/src/app/pages/api/machines';
 
+  const CancelofRegisteredClick = (index: number) => {
+    setMachines(machines.filter((_, i) => i !== index));
+  }
 // 404エラー出る
-  useEffect(() => {
-    const fetchMachines = async () => {
-      try {
-        // 将来的にはバックエンド側から装置の情報をもらう。
-        const response = await axios.get(MachinesInfo);
-        setMachines(response.data);
-      } catch (error) {
-        if (axios.isAxiosError(error)) {
-          // Axiosエラーの場合の処理
-          setError(`データの取得中にエラーが発生しました: ${error.message}`);
-        } else {
-          // その他のエラーの場合の処理
-          setError('データの取得中に予期しないエラーが発生しました。');
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchMachines = async () => {
+  //     try {
+  //       // 将来的にはバックエンド側から装置の情報をもらう。
+  //       const response = await axios.get(MachinesInfo);
+  //       setMachines(response.data);
+  //     } catch (error) {
+  //       if (axios.isAxiosError(error)) {
+  //         // Axiosエラーの場合の処理
+  //         setError(`データの取得中にエラーが発生しました: ${error.message}`);
+  //       } else {
+  //         // その他のエラーの場合の処理
+  //         setError('データの取得中に予期しないエラーが発生しました。');
+  //       }
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchMachines();
-  }, []);
+  //   fetchMachines();
+  // }, []);
 
-  if (loading) {
-    return <div>ロード中...</div>;
-  }
+  // if (loading) {
+  //   return <div>ロード中...</div>;
+  // }
 
-  if (error) {
-    return <div>{error}</div>;
-  }
+  // if (error) {
+  //   return <div>{error}</div>;
+  // }
 
   return (
     <main>
@@ -52,7 +55,7 @@ const Home: React.FC = () => {
       <br />
       <ul>
         {machines.map((machine, index) => (
-          <Card key={index} machineInfo={machine} />
+          <Card key={index} machineInfo={machine} isEnableDeleteButton={true} isEnableDetailButton={true} deleteClick={() => CancelofRegisteredClick(index)}/>
         ))}
       </ul>
     </main>
