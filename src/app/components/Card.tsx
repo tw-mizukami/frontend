@@ -19,16 +19,16 @@ export const Card: React.FC<CardProps> = ({ machineInfo }) => {
             <div className="flex flex-wrap">
                 <div className="p-4 flex flex-col h-full sm:p-7 border border-blue-500 rounded-xl w-[300px]">
                     <h3 className="text-lg font-bold text-gray-800 dark:text-white">
-                        { machineInfo.ipAdr } 
+                        IP Address: { machineInfo.ipAdr } 
                     </h3>
                     <p className="mt-1 text-gray-500 dark:text-neutral-400">
-                        速度
+                        速度: { machineInfo.speed } 
                     </p>
                     <p className="mt-1 text-gray-500 dark:text-neutral-400">
-                        良品数
+                        良品数: { machineInfo.goodNum } 
                     </p>
                     <p className="mt-1 text-gray-500 dark:text-neutral-400">
-                        NG数
+                        NG数: { machineInfo.NgNum } 
                     </p>
                 </div>
             </div>
