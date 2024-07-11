@@ -1,53 +1,53 @@
 'use client';
 
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Card } from '../app/components/Card';
 import { Machine } from '../app/Type'; // Machine型をインポート
 
 const Home: React.FC = () => {
-  const [machines, setMachines] = useState<Machine[]>([
-    { ipAdr: '192.168.0.100', speed:'15000', goodNum:'10000000', NgNum:'1500' },
-    { ipAdr: '192.168.0.101', speed:'12000', goodNum:'15000000', NgNum:'1000' },
-    { ipAdr: '192.168.0.102', speed:'13000', goodNum:'18000000', NgNum:'6000' },
-  ]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const MachinesInfo = 'http://localhost:3000/src/app/pages/api/machines';
 
+  // 取得した装置データは、グローバルに持っていた方がいい？それともここ？
+  // 一度ソフトを落として再起動したときに、登録済みのデータの再取得処理をする必要はある。が今後対応。
+  const [machines, setMachines] = useState<Machine[]>([
+    { ipAdr: '192.168.0.100', speed: '15000', goodNum: '10000000', NgNum: '1500' },
+    { ipAdr: '192.168.0.101', speed: '12000', goodNum: '15000000', NgNum: '1000' },
+    { ipAdr: '192.168.0.102', speed: '13000', goodNum: '18000000', NgNum: '6000' },
+  ]);
+
+  // 登録解除
   const CancelofRegisteredClick = (index: number) => {
     setMachines(machines.filter((_, i) => i !== index));
   }
-// 404エラー出る
+
+  // 登録
+  const RegisteredClick = (machineInfo : Machine) => {
+    setMachines([...machines, machineInfo]);
+  }
+
+  // 将来的にはApp Routerで値をもらう。
   // useEffect(() => {
   //   const fetchMachines = async () => {
   //     try {
-  //       // 将来的にはバックエンド側から装置の情報をもらう。
-  //       const response = await axios.get(MachinesInfo);
-  //       setMachines(response.data);
-  //     } catch (error) {
-  //       if (axios.isAxiosError(error)) {
-  //         // Axiosエラーの場合の処理
-  //         setError(`データの取得中にエラーが発生しました: ${error.message}`);
-  //       } else {
-  //         // その他のエラーの場合の処理
-  //         setError('データの取得中に予期しないエラーが発生しました。');
+  //       const response = await fetch("/machineInfo", {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({ machine: machines }),
+  //       });
+
+  //       if (!response.ok) {
+  //         throw new Error("Response is not OK");
   //       }
-  //     } finally {
-  //       setLoading(false);
+
+  //       const data = await response.json();
+
+  //     } catch (error) {
   //     }
   //   };
 
   //   fetchMachines();
   // }, []);
-
-  // if (loading) {
-  //   return <div>ロード中...</div>;
-  // }
-
-  // if (error) {
-  //   return <div>{error}</div>;
-  // }
 
   return (
     <main>
@@ -55,7 +55,7 @@ const Home: React.FC = () => {
       <br />
       <ul>
         {machines.map((machine, index) => (
-          <Card key={index} machineInfo={machine} isEnableDeleteButton={true} isEnableDetailButton={true} deleteClick={() => CancelofRegisteredClick(index)}/>
+          <Card key={index} machineInfo={machine} isEnableDeleteButton={true} isEnableDetailButton={true} deleteClick={() => CancelofRegisteredClick(index)} />
         ))}
       </ul>
     </main>
