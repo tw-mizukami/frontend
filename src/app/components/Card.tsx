@@ -21,19 +21,11 @@ export const Card: React.FC<CardProps> = ({ machineInfo, isEnableDeleteButton, i
     return (
         <div className="bg-white border rounded-xl shadow-sm sm:flex dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70" style={{ width: '300px', height: '150px' }}>
             {isEnableDetailButton && (
-                // Link使うとボタンサイズ変わる・・・・
-                <Link href="../Registered" passHref>
-                    <button
-                        type="button"
-                        className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-                    >
+                // Link使うとボタンサイズ変わる・・・・そもそもLINKのときボタンはいらない
+                <Link href="../Registered" passHref
+                    className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+                    >       
                         詳細表示
-                    </button>
-                    {/* <a
-                        className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-                    >
-                        詳細表示
-                    </a> */}
                 </Link>
 
             )}

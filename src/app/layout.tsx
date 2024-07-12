@@ -16,6 +16,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  // get 
+  // provider
+
   return (
     <html lang="ja">
       <body className={`flex ${inter.className}`}>

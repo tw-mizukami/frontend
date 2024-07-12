@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-import { Machine } from '../Type'; // Machine型をインポート
+import { Machine } from '../app/Type'; // Machine型をインポート
 
 // 将来的には装置情報はグローバルで持ち、各コンポーネントから参照しやすくする
 
