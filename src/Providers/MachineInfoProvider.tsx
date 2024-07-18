@@ -1,27 +1,27 @@
-import React, { createContext, useState } from "react";
-import { Machine } from '../app/Type'; // Machine型をインポート
+'use client';
 
-// 将来的には装置情報はグローバルで持ち、各コンポーネントから参照しやすくする
+import React, { ReactNode, createContext, useState } from "react";
+import { MachineInfoType } from '../app/MachineInfoType'; // Machine型をインポート
 
-export const MachineInforsContext = createContext({});
+// コンテキストの初期値を設定
+export const MachineInfoContext = createContext<{
+    machineInfo: MachineInfoType[];
+    setMachineInfo: React.Dispatch<React.SetStateAction<MachineInfoType[]>>;
+}>({
+    machineInfo: [],
+    setMachineInfo: () => { },
+});
 
-export const MachineInfoProvider = (props) => {
-    const { children } = (props);
-    const [machineInfos, setMachineInfos] = useState<Machine[]>([]);
+interface MachineInfoProviderProps {
+    children: ReactNode;
+}
+
+// どのページからでも、装置情報を参照可能とする。
+export const MachineInfoProvider: React.FC<MachineInfoProviderProps> = ({ children }) => {
+    const [machineInfo, setMachineInfo] = useState<MachineInfoType[]>([]);
     return (
-        <MachineInforsContext.Provider value={{machineInfos}}>
+        <MachineInfoContext.Provider value={{ machineInfo, setMachineInfo }}>
             {children}
-        </MachineInforsContext.Provider>
+        </MachineInfoContext.Provider>
     )
 };
-
-// 使い方
-/*
-import { useContext } from "react"
-inport { MachineInfors } from "このファイルのパス";
-
-// 値の更新
-const { setMachineInfos } = useContext(MachineInfors);
-setMachineInfos({ ipAdr: "192.168.10.100"});
-
-*/

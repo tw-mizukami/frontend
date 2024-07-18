@@ -2,13 +2,13 @@
 
 import React, { useState } from 'react';
 import { Card } from '../components/Card';
-import { Machine } from '../Type';
+import { MachineInfoType } from '../MachineInfoType';
 
 // 登録画面
 const Registered = () => { // プロパティの正しい取り出し方
 
     const [DetecctMessage, SetDetecctMessage] = useState<string | null>(null);
-    const MachineInfo: Machine = {
+    const MachineInfo: MachineInfoType = {
         ipAdr: '192.168.0.100',
         speed: '15000',
         goodNum: '10000000',

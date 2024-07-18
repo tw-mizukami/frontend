@@ -1,9 +1,9 @@
 import React from 'react'
 import Link from "next/link";
-import { Machine } from '../Type'
+import { MachineInfoType } from '../MachineInfoType'
 
 type CardProps = {
-    machineInfo?: Machine;
+    machineInfo?: MachineInfoType;
     isEnableDeleteButton: boolean;
     isEnableDetailButton: boolean;
     deleteClick: () => void;
@@ -24,8 +24,8 @@ export const Card: React.FC<CardProps> = ({ machineInfo, isEnableDeleteButton, i
                 // Link使うとボタンサイズ変わる・・・・そもそもLINKのときボタンはいらない
                 <Link href="../Registered" passHref
                     className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-                    >       
-                        詳細表示
+                >
+                    詳細表示
                 </Link>
 
             )}
