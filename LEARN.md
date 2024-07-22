@@ -18,3 +18,6 @@
 
 - Pageはサーバーサイドのコードとする（use clientは定義しないこと）
 - export defaultを付けること
+
+# Provider
+ グローバルで使用したい場合、layoutファイルにて<>（タグ）で囲むこと

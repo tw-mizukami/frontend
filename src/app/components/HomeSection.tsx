@@ -9,39 +9,23 @@ import { MachineInfoType } from '../../app/MachineInfoType';
 export const HomeSection: React.FC<{ response: any }> = ({ response }) => {
   const { machineInfo, setMachineInfo } = useContext(MachineInfoContext);
 
-  // あとで、ここの処理をループしてセットさせる。今は固定。
   useEffect(() => {
-    const fetchData = async () => {
-      if (response && response["Machine1"]) {
-        const machineData = response["Machine1"];
-        const info: MachineInfoType = {
-          ipAdr: machineData[0],
-          speed: machineData[1],
-          goodNum: machineData[2],
-          NgNum: machineData[3]
-        };
 
-        setMachineInfo([info]);
-      }
-      if (response && response["Machine1"]) {
-        const machineData = response["Machine1"];
-        const info: MachineInfoType = {
-          ipAdr: machineData[0],
-          speed: machineData[1],
-          goodNum: machineData[2],
-          NgNum: machineData[3]
-        };
-        setMachineInfo([info]);
-      }
-      if (response && response["Machine1"]) {
-        const machineData = response["Machine1"];
-        const info: MachineInfoType = {
-          ipAdr: machineData[0],
-          speed: machineData[1],
-          goodNum: machineData[2],
-          NgNum: machineData[3]
-        };
-        setMachineInfo([info]);
+    console.log(response);
+
+    const fetchData = async () => {
+      if (response) {
+        const newMachineInfo: MachineInfoType[] = Object.keys(response).map(key => {
+          const machineData = response[key];
+          return {
+            ipAdr: machineData[0],
+            speed: machineData[1],
+            goodNum: machineData[2],
+            NgNum: machineData[3]
+          };
+        });
+
+        setMachineInfo(newMachineInfo);
       }
     };
 

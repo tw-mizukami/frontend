@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Sidebar } from "./components/Sidebar";
+import { MachineInfoProvider } from '../Providers/MachineInfoProvider'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,12 +23,12 @@ export default function RootLayout({
 
   return (
     <html lang="ja">
-      <body className={`flex ${inter.className}`}>
-       <Sidebar />
-       <div className="ml-[350px]"> {children}</div>
-       
+      <MachineInfoProvider>
+        <body className={`flex ${inter.className}`}>
+          <Sidebar />
+          <div className="ml-[350px]"> {children}</div>
         </body>
-
+      </MachineInfoProvider>
     </html>
   );
 }

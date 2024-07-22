@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Card } from '../app/components/Card';
-import { MachineInfoType } from './MachineInfoType'; // Machine型をインポート
 import { HomeSection } from './components/HomeSection';
 
 const Home: React.FC = async () => {
@@ -8,7 +6,9 @@ const Home: React.FC = async () => {
   const data = await response.json();
 
   return (
-    <HomeSection response={data} />
+    <>
+      <HomeSection response={data} />
+    </>
   )
 }
 
