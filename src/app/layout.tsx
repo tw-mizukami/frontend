@@ -24,9 +24,11 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <MachineInfoProvider>
-        <body className={`flex ${inter.className}`}>
+        <body className={"flex ${inter.className}"}>
           <Sidebar />
-          <div className="ml-[350px]"> {children}</div>
+          <div className="w-full">
+            <div className="ml-[350px]"> {children}</div>
+          </div>
         </body>
       </MachineInfoProvider>
     </html>

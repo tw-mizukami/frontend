@@ -14,20 +14,14 @@ export const Card: React.FC<CardProps> = ({ machineInfo, isEnableDeleteButton, i
         return null; // machineInfoがundefinedの場合、何も表示しない
     }
 
-    // 上手くtrue,falseを渡せてないので一旦強制true
-    isEnableDeleteButton = true;
-    isEnableDetailButton = true;
-
     return (
         <div className="bg-white border rounded-xl shadow-sm sm:flex dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70" style={{ width: '300px', height: '150px' }}>
             {isEnableDetailButton && (
-                // Link使うとボタンサイズ変わる・・・・そもそもLINKのときボタンはいらない
-                <Link href="../Registered" passHref
+                <Link href="../MachineInfoDetails" passHref
                     className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
                 >
                     詳細表示
                 </Link>
-
             )}
 
             <div className="flex-shrink-0 relative w-[100%] rounded-t-xl overflow-hidden pt-[40%] sm:rounded-s-xl sm:max-w-60 md:rounded-se-none md:max-w-xs">

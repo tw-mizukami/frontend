@@ -33,14 +33,18 @@ export const HomeSection: React.FC<{ response: any }> = ({ response }) => {
   }, [response, setMachineInfo]); // responseが変更されたときに再実行する
 
   // 登録解除
+  // 1クッションおいて、はい選択で解除させるかな
   const CancelofRegisteredClick = (index: number) => {
-    setMachineInfo(machineInfo.filter((_, i) => i !== index));
+    const result = window.confirm("本当に解除してもよろしいでしょうか？");
+    if (result) {
+      setMachineInfo(machineInfo.filter((_, i) => i !== index));
+    }
   }
 
   return (
     <main>
-      <h1>装置一覧</h1>
-      <h1>{machineInfo.length > 0 ? machineInfo[0].ipAdr : "Loading..."}</h1>
+      <h1 className='mt-5'>装置一覧</h1>
+      <h1>{machineInfo.length > 0 ? "" : "Loading..."}</h1>
       <br />
       <ul>
         {machineInfo.map((machineInfo, index) => (
