@@ -41,8 +41,52 @@ export const HomeSection: React.FC<{ response: any }> = ({ response }) => {
     }
   }
 
+  //Test用
+  const testButtonClick = async () => {
+    const data: MachineInfoType[] = [
+      {
+        ipAdr: "192.168.0.10",
+        speed: "1000",
+        goodNum: "2000",
+        NgNum: "3000",
+
+      },
+      {
+        ipAdr: "192.168.0.11",
+        speed: "1000",
+        goodNum: "2000",
+        NgNum: "3000",
+
+      },
+      {
+        ipAdr: "192.168.0.12",
+        speed: "1000",
+        goodNum: "2000",
+        NgNum: "3000",
+
+      }
+    ];
+
+    try {
+      const res = await fetch('/machineInfo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+    } catch (error) {
+    }
+  };
+
   return (
     <main>
+      <div>
+        <button onClick={testButtonClick} type="button" className="text-red-500 hover:text-gray-600">
+          Test2
+        </button>
+      </div>
+
       <h1 className='mt-5'>装置一覧</h1>
       <h1>{machineInfo.length > 0 ? "" : "Loading..."}</h1>
       <br />
