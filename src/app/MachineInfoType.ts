@@ -1,6 +1,6 @@
 export type MachineInfoType = {
-  ipAdr: string;
+  ip: string;
   speed: string;
-  goodNum: string;
-  NgNum: string;
+  good_num: string;
+  ng_num: string;
 };

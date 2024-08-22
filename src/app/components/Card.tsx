@@ -36,16 +36,16 @@ export const Card: React.FC<CardProps> = ({ machineInfo, isEnableDeleteButton, i
             <div className="flex flex-wrap">
                 <div className="p-4 flex flex-col h-full sm:p-7 border border-blue-500 rounded-xl w-[300px]">
                     <h3 className="text-lg font-bold text-gray-800 dark:text-white">
-                        IP Address: {machineInfo.ipAdr}
+                        IP Address: {machineInfo.ip}
                     </h3>
                     <p className="mt-1 text-gray-500 dark:text-neutral-400">
                         速度: {machineInfo.speed}
                     </p>
                     <p className="mt-1 text-gray-500 dark:text-neutral-400">
-                        良品数: {machineInfo.goodNum}
+                        良品数: {machineInfo.good_num}
                     </p>
                     <p className="mt-1 text-gray-500 dark:text-neutral-400">
-                        NG数: {machineInfo.NgNum}
+                        NG数: {machineInfo.ng_num}
                     </p>
                 </div>
             </div>

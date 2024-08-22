@@ -13,10 +13,10 @@ const Registered = () => { // プロパティの正しい取り出し方
 
     const MachineInfo: MachineInfoType[] = [
         {
-            ipAdr: '192.168.0.100',
+            ip: '192.168.0.100',
             speed: '15000',
-            goodNum: '10000000',
-            NgNum: '1500'
+            good_num: '10000000',
+            ng_num: '1500'
         }
     ];
 

@@ -9,29 +9,6 @@ import { MachineInfoType } from '../../app/MachineInfoType';
 export const HomeSection: React.FC<{ response: any }> = ({ response }) => {
   const { machineInfo, setMachineInfo } = useContext(MachineInfoContext);
 
-  useEffect(() => {
-
-    console.log(response);
-
-    const fetchData = async () => {
-      if (response) {
-        const newMachineInfo: MachineInfoType[] = Object.keys(response).map(key => {
-          const machineData = response[key];
-          return {
-            ipAdr: machineData[0],
-            speed: machineData[1],
-            goodNum: machineData[2],
-            NgNum: machineData[3]
-          };
-        });
-
-        setMachineInfo(newMachineInfo);
-      }
-    };
-
-    fetchData();
-  }, [response, setMachineInfo]); // responseが変更されたときに再実行する
-
   // 登録解除
   // 1クッションおいて、はい選択で解除させるかな
   const CancelofRegisteredClick = (index: number) => {
@@ -41,50 +18,63 @@ export const HomeSection: React.FC<{ response: any }> = ({ response }) => {
     }
   }
 
-  //Test用
-  const testButtonClick = async () => {
+  //Test用 装置情報をBackend側に送信して、そのままそのデータをもらう。
+  const SendButtonClick = async () => {
     const data: MachineInfoType[] = [
       {
-        ipAdr: "192.168.0.10",
+        ip: "192.168.0.10",
         speed: "1000",
-        goodNum: "2000",
-        NgNum: "3000",
+        good_num: "2000",
+        ng_num: "3000",
 
       },
       {
-        ipAdr: "192.168.0.11",
+        ip: "192.168.0.11",
         speed: "1000",
-        goodNum: "2000",
-        NgNum: "3000",
+        good_num: "2000",
+        ng_num: "3000",
 
       },
       {
-        ipAdr: "192.168.0.12",
+        ip: "192.168.0.12",
         speed: "1000",
-        goodNum: "2000",
-        NgNum: "3000",
+        good_num: "2000",
+        ng_num: "3000",
 
       }
     ];
 
     try {
-      const res = await fetch('/machineInfo', {
+      const res = await fetch('http://127.0.0.1:5000/machineInfo', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
       });
+
+      if (!res.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const responseData = await res.json();
+      setMachineInfo(responseData);
     } catch (error) {
     }
   };
 
+
+
   return (
     <main>
-      <div>
-        <button onClick={testButtonClick} type="button" className="text-red-500 hover:text-gray-600">
-          Test2
+      <div className="space-x-4">
+        <button onClick={SendButtonClick} type="button" className="bg-blue-500 text-white hover:text-gray-600 text-lg rounded-lg">
+          Send
         </button>
+        <button onClick={SendButtonClick} type="button" className="bg-red-500 text-white hover:text-gray-600 text-lg rounded-lg">
+          Rest
+        </button>
+
       </div>
 
       <h1 className='mt-5'>装置一覧</h1>
