@@ -41,3 +41,12 @@
 →Ver１５から、この機能はなくなるらしい
 オプトアウトしてもアクセスしてくれない
 Appルータではなく、pageルータであれば問題ない
+
+# git ディレクトリRename
+ 大文字小文字を認証できるようにする。
+ 　git config core.ignorecase false
+　ディレクトリ名を変える。例）Login⇒login
+　コミットする。
+　変更前のディレクトリを削除する
+　git rm -r src/app/Login
+
