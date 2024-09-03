@@ -9,6 +9,20 @@ export const DetailSection = () => {
     const lotEndPercentage = 40;
     const boxFullPercentage = 80;
 
+    const UpDateButtonClick = () => {
+        // const response = await fetch("http://127.0.0.1:5000/lotInfo", {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify({}),
+        // })
+
+        // const json = await response.json();
+
+    };
+
+
     // レイアウトで使うのは何がいい？グリッド？Flex box?　時刻を整列させて表示させたい
     // UIがダサい
     return (
@@ -19,6 +33,10 @@ export const DetailSection = () => {
                 >
                     戻る
                 </Link>
+                <button onClick={UpDateButtonClick} type="button" className="bg-yellow-500 text-white hover:text-gray-600 text-lg ml-10">
+                    更新
+                </button>
+
             </div>
 
             {/* <div className="flex flex-col gap-4"> */}

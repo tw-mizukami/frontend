@@ -9,9 +9,7 @@ const loginSchema = z.object({
     password: z.string(),
 });
 
-export async function loginAction(prevState: any, formData: FormData) {
-
-    console.log("loginAction");
+export async function userRegistrationAction(prevState: any, formData: FormData) {
 
     const validatedFileds = loginSchema.safeParse({
         username: formData.get("username"),
@@ -28,11 +26,10 @@ export async function loginAction(prevState: any, formData: FormData) {
     }
 
     const { username, password } = validatedFileds.data;
-    console.log(username);
 
     // Auth.js
 
-    const response = await fetch("http://127.0.0.1:5000/user/login", {
+    const response = await fetch("http://127.0.0.1:5000//user/register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

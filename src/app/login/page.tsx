@@ -35,10 +35,11 @@ const Login = () => {
                         </div>
                     </div>
                 </div>
-
             </div>
 
-            <button disabled={pending}>ログイン</button>
+            <button disabled={pending} className="mt-5 py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                ログイン
+            </button>
         </form>
     );
 };
