@@ -3,25 +3,30 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Link from "next/link";
 import RunDataChart from '../components/RunDataChart';
+import { lotInfoType } from '../lotInfoType';
 
 export const DetailSection = () => {
-    const time = "2024/1/1 11:11";
-    const lotEndPercentage = 40;
-    const boxFullPercentage = 80;
+    const [lotInfo, setLotInfo] = useState<lotInfoType | null>(null);
+    const lotEndPercentage = lotInfo?.productionPlan_num
+        ? (Number(lotInfo.supply_num) / Number(lotInfo.productionPlan_num)) * 100
+        : 0;
+    const boxFullPercentage = lotInfo?.productionPlan_num
+        ? (Number(lotInfo.box_num.split(",")[0]) / 3000) * 100
+        : 0;
 
-    const UpDateButtonClick = () => {
-        // const response = await fetch("http://127.0.0.1:5000/lotInfo", {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify({}),
-        // })
+    const UpDateButtonClick = async () => {
+        const response = await fetch("http://127.0.0.1:5000/lotInfo", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify("192.168.0.10"),       // IPアドレスを渡す。
+        })
 
-        // const json = await response.json();
-
+        const json = await response.json();
+        console.log(json);
+        setLotInfo(json);
     };
-
 
     // レイアウトで使うのは何がいい？グリッド？Flex box?　時刻を整列させて表示させたい
     // UIがダサい
@@ -36,7 +41,9 @@ export const DetailSection = () => {
                 <button onClick={UpDateButtonClick} type="button" className="bg-yellow-500 text-white hover:text-gray-600 text-lg ml-10">
                     更新
                 </button>
-
+                {/* <p>
+                    {lotInfo ? JSON.stringify(lotInfo) : 'No data'}
+                </p> */}
             </div>
 
             {/* <div className="flex flex-col gap-4"> */}
@@ -45,7 +52,7 @@ export const DetailSection = () => {
                     <p>ロット開始時刻</p>
                 </div>
                 <div className="mt-2 h-[40px] border-b border-gray-300">
-                    <p>{time}</p>
+                    <p>{lotInfo?.start_time ? new Date(lotInfo.start_time).toLocaleString() : 'No start time'}</p>
                 </div>
                 <div className="mt-2 h-[40px] border-b border-gray-300" />
 
@@ -53,11 +60,13 @@ export const DetailSection = () => {
                     <p>ロット終了予定時刻</p>
                 </div>
                 <div className="mt-2 h-[40px] border-b border-gray-300">
-                    <p>{time}</p>
+                    {lotInfo?.start_time
+                        ? new Date(new Date(lotInfo.start_time).getTime() + 3 * 60 * 60 * 1000).toLocaleString()
+                        : 'No time'}
                 </div >
                 <div className="mt-2 h-[40px] border-b border-gray-300 justify-items-start">
                     <div className="inline-block py-0.5 px-1.5 bg-blue-50 border border-blue-200 text-xs font-medium text-blue-600 rounded-lg dark:bg-blue-800/30 dark:border-blue-800 dark:text-blue-500">
-                        {lotEndPercentage}%
+                        {lotEndPercentage.toFixed(1)}%
                     </div>
                     <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700">
                         <div className="h-full bg-blue-600" style={{ width: `${lotEndPercentage}%` }}></div>
@@ -68,11 +77,13 @@ export const DetailSection = () => {
                     <p>BOX交換予定時刻</p>
                 </div>
                 <div className="mt-2 h-[40px] border-b border-gray-300">
-                    <p>{time}</p>
+                    {lotInfo?.start_time
+                        ? new Date(new Date(lotInfo.start_time).getTime() + 1 * 60 * 60 * 1000).toLocaleString()
+                        : 'No time'}
                 </div>
                 <div className="mt-2 h-[40px] border-b border-gray-300 justify-items-start">
                     <div className="inline-block py-0.5 px-1.5 bg-blue-50 border border-blue-200 text-xs font-medium text-blue-600 rounded-lg dark:bg-blue-800/30 dark:border-blue-800 dark:text-blue-500">
-                        {boxFullPercentage}%
+                        {boxFullPercentage.toFixed(1)}%
                     </div>
                     <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700">
                         <div className="h-full bg-red-600" style={{ width: `${boxFullPercentage}%` }}></div>
