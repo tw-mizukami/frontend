@@ -1,5 +1,6 @@
 "use server";
 
+import { signIn } from "@/libs/auth";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation"
 import z from "zod"
@@ -31,21 +32,14 @@ export async function loginAction(prevState: any, formData: FormData) {
     console.log(username);
 
     // Auth.js
-
-    const response = await fetch("http://127.0.0.1:5000/user/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
+    await signIn("credentials", {
+        username,
+        password,
+        redirectTo: "/",
     })
-
-    const json = await response.json();
 
     // 正常
     revalidatePath("/");
 
-    redirect("/");
-
-    return {}
+    //redirect("/");
 }

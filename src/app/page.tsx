@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { HomeSection } from './components/HomeSection';
+import { redirect } from 'next/navigation';
+import { auth } from '@/libs/auth';
+import { LogoutButton } from './components/LogoutButton';
 
 const Home: React.FC = async () => {
+
+  const session = await auth();
+  if (!session) {
+    redirect("/login");
+  }
+
   let data = null;
 
   try {
@@ -20,6 +29,9 @@ const Home: React.FC = async () => {
   return (
     <>
       <HomeSection response={data} />
+      <LogoutButton></LogoutButton>
+
+      {session?.accessToken}
     </>
   )
 }
