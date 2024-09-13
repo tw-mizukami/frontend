@@ -2,6 +2,8 @@ import { getAccessToken } from "@/fetchers/authfetcher";
 import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
 
+// ログイン後、ログイン状態を取得処理。ログインしていないと表示させたくないページに
+// ログインしていないときには、ログイン画面に飛ぶようコードの記述する。
 export const { handlers, signIn, signOut, auth } = NextAuth({
     providers: [
         Credentials({

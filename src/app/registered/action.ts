@@ -24,21 +24,21 @@ export async function registeredAction(prevstate: any, formData: FormData) {
     }
 
     const { ip } = validatedFileds.data;
-    const machineInfor: MachineInfoType = {
+    const machineInfo: MachineInfoType = {
         ip: `192.168.0.${ip}`,
-        speed: "1000",
-        good_num: "2000",
-        ng_num: "3000",
+        speed: 1000,
+        good_num: 2000,
+        ng_num: 3000,
     }
 
-    console.log("Sending data:", machineInfor);
+    console.log("Sending data:", machineInfo);
 
     const response = await fetch("http://127.0.0.1:5000/machineInfo", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(machineInfor),
+        body: JSON.stringify(machineInfo),
     })
 
     const json = (await response.json());

@@ -11,7 +11,7 @@ export const DetailSection = () => {
         ? (Number(lotInfo.supply_num) / Number(lotInfo.productionPlan_num)) * 100
         : 0;
     const boxFullPercentage = lotInfo?.productionPlan_num
-        ? (Number(lotInfo.box_num.split(",")[0]) / 3000) * 100
+        ? (Number(lotInfo.box_num[0]) / 3000) * 100
         : 0;
 
     const UpDateButtonClick = async () => {

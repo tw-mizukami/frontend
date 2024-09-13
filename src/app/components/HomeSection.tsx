@@ -3,10 +3,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Card } from '../components/Card';
 import { MachineInfoProvider, MachineInfoContext } from '../../Providers/MachineInfoProvider'
-import { MachineInfoType } from '../../app/MachineInfoType';
+import { machineInfoAction } from '../actions/machineInfoAction';
 
 
-export const HomeSection: React.FC<{ response: any }> = ({ response }) => {
+export const HomeSection = () => {
   const { machineInfo, setMachineInfo } = useContext(MachineInfoContext);
 
   // 登録解除
@@ -18,65 +18,22 @@ export const HomeSection: React.FC<{ response: any }> = ({ response }) => {
     }
   }
 
-  //Test用 装置情報をBackend側に送信して、そのままそのデータをもらう。
-  const SendButtonClick = async () => {
-    const data: MachineInfoType[] = [
-      {
-        ip: "192.168.0.10",
-        speed: "1000",
-        good_num: "2000",
-        ng_num: "3000",
-
-      },
-      {
-        ip: "192.168.0.11",
-        speed: "1000",
-        good_num: "2000",
-        ng_num: "3000",
-
-      },
-      {
-        ip: "192.168.0.12",
-        speed: "1000",
-        good_num: "2000",
-        ng_num: "3000",
-
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await machineInfoAction();
+        setMachineInfo(data);
+      } catch (error) {
+        console.error("Error fetching machine info:", error);
       }
-    ];
+    };
 
-    try {
-      const res = await fetch('http://127.0.0.1:5000/machineInfo', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+    fetchData();
+  }, []);
 
-      if (!res.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const responseData = await res.json();
-      setMachineInfo(responseData);
-    } catch (error) {
-    }
-  };
-
-
-
+  // 登録済みの装置情報を取得して表示する。
   return (
-    <main>
-      <div className="space-x-4">
-        <button onClick={SendButtonClick} type="button" className="bg-blue-500 text-white hover:text-gray-600 text-lg rounded-lg">
-          Send
-        </button>
-        <button onClick={SendButtonClick} type="button" className="bg-red-500 text-white hover:text-gray-600 text-lg rounded-lg">
-          Rest
-        </button>
-
-      </div>
-
+    <div>
       <h1 className='mt-5'>装置一覧</h1>
       <h1>{machineInfo.length > 0 ? "" : "Loading..."}</h1>
       <br />
@@ -85,6 +42,6 @@ export const HomeSection: React.FC<{ response: any }> = ({ response }) => {
           <Card key={index} machineInfo={machineInfo} isEnableDeleteButton={true} isEnableDetailButton={true} deleteClick={() => CancelofRegisteredClick(index)} />
         ))}
       </ul>
-    </main>
+    </div>
   )
 }

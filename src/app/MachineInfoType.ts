@@ -1,6 +1,6 @@
 export type MachineInfoType = {
-  ip: string;
-  speed: string;
-  good_num: string;
-  ng_num: string;
+  ip: string | null;
+  speed: number | null;
+  good_num: number | null;
+  ng_num: number | null;
 };

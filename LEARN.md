@@ -50,3 +50,14 @@ Appルータではなく、pageルータであれば問題ない
 　変更前のディレクトリを削除する
 　git rm -r src/app/Login
 　コミットする際に、変更後も削除状態になっているので、それは解除してコミット
+
+# Auth.js
+ https://authjs.dev/getting-started
+
+
+ ------------------------------------------------------------------------------------------------------------
+ #　アイコン　いろいろあって悩む
+　　　SVGアイコンを使ってはみた　https://fonts.google.com/icons  https://iconbuddy.com/
+
+ # ディレクトリ構成
+      整理しよう　　machineInfoActionは、fechers?
