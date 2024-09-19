@@ -14,13 +14,22 @@ export const DetailSection = () => {
         ? (Number(lotInfo.box_num[0]) / 3000) * 100
         : 0;
 
+    // test
+    const lotinfo: lotInfoType = {
+        start_time: "2024/12/12 12:12:12",
+        productionPlan_num: 10000,
+        supply_num: 1000,
+        box_num: [1000, 1000, 1000],
+    }
+
     const UpDateButtonClick = async () => {
         const response = await fetch("http://127.0.0.1:5000/lotInfo", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify("192.168.0.10"),       // IPアドレスを渡す。
+            // body: JSON.stringify("192.168.0.10"),        // IPアドレスを渡して、LotInfoを取得
+            body: JSON.stringify(lotinfo),           // Test
         })
 
         const json = await response.json();

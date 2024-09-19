@@ -1,7 +1,6 @@
 "use server";
 
 import { revalidatePath } from "next/cache"
-import { redirect } from "next/navigation"
 import z from "zod"
 import { MachineInfoType } from "../MachineInfoType"
 
@@ -23,6 +22,7 @@ export async function registeredAction(prevstate: any, formData: FormData) {
         }
     }
 
+    // test
     const { ip } = validatedFileds.data;
     const machineInfo: MachineInfoType = {
         ip: `192.168.0.${ip}`,
