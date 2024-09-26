@@ -11,7 +11,7 @@ export const DetailSection = () => {
         ? (Number(lotInfo.supply_num) / Number(lotInfo.productionPlan_num)) * 100
         : 0;
     const boxFullPercentage = lotInfo?.productionPlan_num
-        ? (Number(lotInfo.box_num[0]) / 3000) * 100
+        ? (Number(lotInfo.box_num[0].num) / 3000) * 100
         : 0;
 
     // test
@@ -19,7 +19,17 @@ export const DetailSection = () => {
         start_time: "2024/12/12 12:12:12",
         productionPlan_num: 10000,
         supply_num: 1000,
-        box_num: [1000, 1000, 1000],
+        box_num: [
+            {
+                "num": 1000,
+            },
+            {
+                "num": 2000,
+            },
+            {
+                "num": 3000,
+            }
+        ]
     }
 
     const UpDateButtonClick = async () => {
