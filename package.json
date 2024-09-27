@@ -17,6 +17,7 @@
     "react-dom": "^18",
     "react-router-dom": "^6.24.0",
     "recharts": "^2.12.7",
+    "swr": "^2.2.5",
     "zod": "^3.23.8"
   },
   "devDependencies": {

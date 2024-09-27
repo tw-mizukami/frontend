@@ -55,6 +55,9 @@ Appルータではなく、pageルータであれば問題ない
  https://authjs.dev/getting-started
 
 
+## SWRの公式
+https://swr.vercel.app/ja/docs/getting-started
+
  ------------------------------------------------------------------------------------------------------------
  #　アイコン　いろいろあって悩む
 　　　SVGアイコンを使ってはみた　https://fonts.google.com/icons  https://iconbuddy.com/

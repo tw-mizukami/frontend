@@ -4,9 +4,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import Link from "next/link";
 import RunDataChart from '../components/RunDataChart';
 import { lotInfoType } from '../lotInfoType';
+import { lotInfoAction } from '../actions/lotInfoAction';
 
 export const DetailSection = () => {
     const [lotInfo, setLotInfo] = useState<lotInfoType | null>(null);
+    
+    const { swrlotInfo, error, isLoading } = lotInfoAction();
+
     const lotEndPercentage = lotInfo?.productionPlan_num
         ? (Number(lotInfo.supply_num) / Number(lotInfo.productionPlan_num)) * 100
         : 0;
@@ -14,41 +18,12 @@ export const DetailSection = () => {
         ? (Number(lotInfo.box_num[0].num) / 3000) * 100
         : 0;
 
-    // test
-    const lotinfo: lotInfoType = {
-        start_time: "2024/12/12 12:12:12",
-        productionPlan_num: 10000,
-        supply_num: 1000,
-        box_num: [
-            {
-                "num": 1000,
-            },
-            {
-                "num": 2000,
-            },
-            {
-                "num": 3000,
-            }
-        ]
-    }
-
-    const UpDateButtonClick = async () => {
-        const response = await fetch("http://127.0.0.1:5000/lotInfo", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            // body: JSON.stringify("192.168.0.10"),        // IPアドレスを渡して、LotInfoを取得
-            body: JSON.stringify(lotinfo),           // Test
-        })
-
-        const json = await response.json();
-        console.log(json);
-        setLotInfo(json);
-    };
-
-    // レイアウトで使うのは何がいい？グリッド？Flex box?　時刻を整列させて表示させたい
-    // UIがダサい
+    useEffect(() => {
+        if (swrlotInfo) {
+            setLotInfo(swrlotInfo);
+        }
+    }, [swrlotInfo]);
+   
     return (
         <div className="bg-white border dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70 rounded-lg" style={{ width: '800px', height: '700px' }}>
             <div className="mt-8 mb-4 ml-4">
@@ -57,12 +32,14 @@ export const DetailSection = () => {
                 >
                     戻る
                 </Link>
-                <button onClick={UpDateButtonClick} type="button" className="bg-yellow-500 text-white hover:text-gray-600 text-lg ml-10">
+                {/* <button onClick={UpDateButtonClick} type="button" className="bg-yellow-500 text-white hover:text-gray-600 text-lg ml-10">
                     更新
-                </button>
-                {/* <p>
-                    {lotInfo ? JSON.stringify(lotInfo) : 'No data'}
-                </p> */}
+                </button> */}
+                <p>
+                    {error ? 'No response' : ''}
+                    {isLoading ? 'loading...' : ''}
+                </p>
+
             </div>
 
             {/* <div className="flex flex-col gap-4"> */}
