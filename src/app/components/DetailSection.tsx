@@ -4,12 +4,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import Link from "next/link";
 import RunDataChart from '../components/RunDataChart';
 import { lotInfoType } from '../lotInfoType';
-import { lotInfoAction } from '../actions/lotInfoAction';
+import { useLotInfoAction } from '../hook/lotInfoAction';
 
 export const DetailSection = () => {
     const [lotInfo, setLotInfo] = useState<lotInfoType | null>(null);
     
-    const { swrlotInfo, error, isLoading } = lotInfoAction();
+    const { swrlotInfo, error, isLoading } = useLotInfoAction();
 
     const lotEndPercentage = lotInfo?.productionPlan_num
         ? (Number(lotInfo.supply_num) / Number(lotInfo.productionPlan_num)) * 100
@@ -85,6 +85,19 @@ export const DetailSection = () => {
                         <div className="h-full bg-red-600" style={{ width: `${boxFullPercentage}%` }}></div>
                     </div>
                 </div >
+                <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+                    <h2>カウンタ情報</h2>
+
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }} className="ml-4">
+                            <p>供給数</p>
+                            <p>{lotInfo?.supply_num ? lotInfo.supply_num : '---------'}</p>
+                        </div>
+
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }} className="ml-4">
+                        <p>Box数</p>
+                        <p>{lotInfo?.box_num[0]?.num ? lotInfo.box_num[0].num : '---------'}</p>
+                    </div>
+                 </div>
             </div >
             <div className=" ml-4 mt-8 mb-4 w-[700px] bg-sky-100 text-black p-2">
                 <p>稼働グラフ</p>
