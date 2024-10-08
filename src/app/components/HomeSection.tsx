@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Card } from '../components/Card';
 import { MachineInfoProvider, MachineInfoContext } from '../../Providers/MachineInfoProvider'
 import { machineInfoAction } from '../actions/machineInfoAction';
+import { deleteMachineInfoAction } from '../actions/deleteMachineInfoAction';
 
 
 export const HomeSection = () => {
@@ -14,6 +15,7 @@ export const HomeSection = () => {
   const CancelofRegisteredClick = (index: number) => {
     const result = window.confirm("本当に解除してもよろしいでしょうか？");
     if (result) {
+      const data = deleteMachineInfoAction();
       setMachineInfo(machineInfo.filter((_, i) => i !== index));
     }
   }
