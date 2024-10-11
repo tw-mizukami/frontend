@@ -64,3 +64,11 @@ https://swr.vercel.app/ja/docs/getting-started
 
  # ディレクトリ構成
       整理しよう　　machineInfoActionは、fechers?
+
+ # デブロイ手順
+  -  Nginxの設定
+  - リバースプロキシ―で http://localhost:3000にアクセスを流す
+  - Nginxを実行する
+  - サーバーにソースを持っていく
+  - npm run build → npm run start
+  - pm2 → npm run startを常時実行するように変更する

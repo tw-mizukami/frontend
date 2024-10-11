@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import useSWR from 'swr'
 import { lotInfoType } from '../lotInfoType';
+import { getApiurl } from '@/libs/urls';
 
 export const useLotInfoAction = () => {
     const REFRESH_INTERVAL_SECONDES = 10;
@@ -25,7 +26,7 @@ export const useLotInfoAction = () => {
             ]
         }    
 
-        const response = await fetch("http://127.0.0.1:5000/lotInfo", {
+        const response = await fetch(getApiurl("/lotInfo"), {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -1,8 +1,10 @@
 "use server"
 
+import { getApiurl } from "@/libs/urls";
+
 export const deleteMachineInfoAction = async () => {
 
-    const response = await fetch("http://127.0.0.1:5000/machineInfo", {
+    const response = await fetch(getApiurl("/machineInfo"), {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",

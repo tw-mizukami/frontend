@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache"
 import z from "zod"
 import { MachineInfoType } from "../MachineInfoType"
+import { getApiurl } from "@/libs/urls";
 
 const registeredSchema = z.object({
     ip: z.string().regex(/^\d+(\.\d+)?$/, "Invalid number"),
@@ -33,7 +34,7 @@ export async function registeredAction(prevstate: any, formData: FormData) {
 
     console.log("Sending data:", machineInfo);
 
-    const response = await fetch("http://127.0.0.1:5000/machineInfo", {
+    const response = await fetch(getApiurl("/machineInfo"), {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

@@ -1,10 +1,11 @@
 "use server"
 
 import { TestmachineInfo } from '@/consts/consts';
+import { getApiurl } from '@/libs/urls';
 
 export const machineInfoAction = async () => {
 
-    const response = await fetch("http://127.0.0.1:5000/machineInfo", {
+    const response = await fetch(getApiurl("/machineInfo"), {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
